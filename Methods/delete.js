@@ -6,7 +6,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 let userID = 0;
 
-module.exports.get = (event, context, callback) => {
+module.exports.delete = (event, context, callback) => {
   const params = {
     TableName: "BankAccounts",
     
@@ -28,47 +28,52 @@ module.exports.get = (event, context, callback) => {
       result.Items.forEach(function (element, index, array) {
         console.log(
             "printing",
-            element.UserId
+            element.UserId, "(Line 31)"
         );
-        console.log("Success in For Looop", result);
+        setTimeout(function() { updateID(element.userID); }, 1000);
       });
-      console.log("Success after For Looop", result);
       const response = {
         statusCode: 200,
         body: JSON.stringify(result.Items),
       };
-      userID = parseInt(result.Items.userID)
     }
   });
+
+  setTimeout(deleteUser,1500)
+
 };
 
+function updateID(tempUserID) {
+  userID = parseInt(tempUserID);
+}
 
-module.exports.delete = (event, context, callback) => {
-  const params = {
+function deleteUser() {
+  const params1 = {
     TableName: "BankAccounts",
     Key: {
-      id: userID,
+      UserId: userID,
     },
   };
-  console.log(userID)
-  // delete the todo from the database
-  dynamoDb.delete(params, (error) => {
-    // handle potential errors
-    if (error) {
-      console.error(error);
-      callback(null, {
-        statusCode: error.statusCode || 501,
-        headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t remove the todo item.',
-      });
-      return;
-    }
+  console.log("User ID: " + userID + " (Line 48)")
 
-    // create a response
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify({"Account has been Closed":""}),
-    };
-    callback(null, response);
-  });
-};
+    // delete the todo from the database
+    dynamoDb.delete(params1, (error) => {
+      // handle potential errors
+      if (error) {
+        console.error(error);
+        callback(null, {
+          statusCode: error.statusCode || 501,
+          headers: { 'Content-Type': 'text/plain' },
+          body: 'Couldn\'t remove the todo item.',
+        });
+        return;
+      }
+  
+      // create a response
+      const response = {
+        statusCode: 200,
+        body: JSON.stringify({"Account has been Closed":""}),
+      };
+      callback(null, response);
+    });
+}

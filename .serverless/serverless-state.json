@@ -202,7 +202,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/Banking-Project/dev/1623875785780-2021-06-16T20:36:25.780Z/Banking-Project.zip"
+                "S3Key": "serverless/Banking-Project/dev/1623878341081-2021-06-16T21:19:01.081Z/Banking-Project.zip"
               },
               "Handler": "Methods/get.get",
               "Runtime": "nodejs14.x",
@@ -227,7 +227,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/Banking-Project/dev/1623875785780-2021-06-16T20:36:25.780Z/Banking-Project.zip"
+                "S3Key": "serverless/Banking-Project/dev/1623878341081-2021-06-16T21:19:01.081Z/Banking-Project.zip"
               },
               "Handler": "Methods/create.create",
               "Runtime": "nodejs14.x",
@@ -252,7 +252,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/Banking-Project/dev/1623875785780-2021-06-16T20:36:25.780Z/Banking-Project.zip"
+                "S3Key": "serverless/Banking-Project/dev/1623878341081-2021-06-16T21:19:01.081Z/Banking-Project.zip"
               },
               "Handler": "Methods/delete.delete",
               "Runtime": "nodejs14.x",
@@ -270,34 +270,34 @@
               "DeleteLogGroup"
             ]
           },
-          "PostLambdaVersion2cutH6tCseO4RZ7elQEVP1F03SwtCevKii9aC8Q": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "PostLambdaFunction"
-              },
-              "CodeSha256": "4aj21B05qc2pr+izFOw8IzTzY7okAjW6qyDK0EzGKU8="
-            }
-          },
-          "DeleteLambdaVersionjONjgMG3wehOw0UmdEIrOzt5C8HDN0TaTbImk39R8": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "DeleteLambdaFunction"
-              },
-              "CodeSha256": "4aj21B05qc2pr+izFOw8IzTzY7okAjW6qyDK0EzGKU8="
-            }
-          },
-          "GetLambdaVersion8eZHB7ubroamDQqKxudLLojiOT9LMAILP3AEHO4n1I": {
+          "GetLambdaVersion96G2BSHiH1OjZqM1eUqyhrwOCjEVbl4XjcRij707k": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetLambdaFunction"
               },
-              "CodeSha256": "4aj21B05qc2pr+izFOw8IzTzY7okAjW6qyDK0EzGKU8="
+              "CodeSha256": "zSQP9mewjjepw41ffOL8cdv+VWVzHlJtZqjrdpYvSWU="
+            }
+          },
+          "PostLambdaVersionsnD4ZOkLVYMCIlGzyOq6wxec3tAVr4w4pci8kwgQ948": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "PostLambdaFunction"
+              },
+              "CodeSha256": "zSQP9mewjjepw41ffOL8cdv+VWVzHlJtZqjrdpYvSWU="
+            }
+          },
+          "DeleteLambdaVersionFKBLC8c54OTBphKRNSFdnwUENIl8N7BoE6UGGRItw": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteLambdaFunction"
+              },
+              "CodeSha256": "zSQP9mewjjepw41ffOL8cdv+VWVzHlJtZqjrdpYvSWU="
             }
           },
           "ApiGatewayRestApi": {
@@ -669,7 +669,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1623875781013": {
+          "ApiGatewayDeployment1623878336601": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -807,10 +807,19 @@
               "Name": "sls-Banking-Project-dev-ServerlessDeploymentBucketName"
             }
           },
+          "GetLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetLambdaVersion96G2BSHiH1OjZqM1eUqyhrwOCjEVbl4XjcRij707k"
+            },
+            "Export": {
+              "Name": "sls-Banking-Project-dev-GetLambdaFunctionQualifiedArn"
+            }
+          },
           "PostLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PostLambdaVersion2cutH6tCseO4RZ7elQEVP1F03SwtCevKii9aC8Q"
+              "Ref": "PostLambdaVersionsnD4ZOkLVYMCIlGzyOq6wxec3tAVr4w4pci8kwgQ948"
             },
             "Export": {
               "Name": "sls-Banking-Project-dev-PostLambdaFunctionQualifiedArn"
@@ -819,19 +828,10 @@
           "DeleteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteLambdaVersionjONjgMG3wehOw0UmdEIrOzt5C8HDN0TaTbImk39R8"
+              "Ref": "DeleteLambdaVersionFKBLC8c54OTBphKRNSFdnwUENIl8N7BoE6UGGRItw"
             },
             "Export": {
               "Name": "sls-Banking-Project-dev-DeleteLambdaFunctionQualifiedArn"
-            }
-          },
-          "GetLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetLambdaVersion8eZHB7ubroamDQqKxudLLojiOT9LMAILP3AEHO4n1I"
-            },
-            "Export": {
-              "Name": "sls-Banking-Project-dev-GetLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -984,7 +984,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetLambdaVersion8eZHB7ubroamDQqKxudLLojiOT9LMAILP3AEHO4n1I"
+        "versionLogicalId": "GetLambdaVersion96G2BSHiH1OjZqM1eUqyhrwOCjEVbl4XjcRij707k"
       },
       "post": {
         "handler": "Methods/create.create",
@@ -1022,7 +1022,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "PostLambdaVersion2cutH6tCseO4RZ7elQEVP1F03SwtCevKii9aC8Q"
+        "versionLogicalId": "PostLambdaVersionsnD4ZOkLVYMCIlGzyOq6wxec3tAVr4w4pci8kwgQ948"
       },
       "delete": {
         "handler": "Methods/delete.delete",
@@ -1060,7 +1060,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "DeleteLambdaVersionjONjgMG3wehOw0UmdEIrOzt5C8HDN0TaTbImk39R8"
+        "versionLogicalId": "DeleteLambdaVersionFKBLC8c54OTBphKRNSFdnwUENIl8N7BoE6UGGRItw"
       }
     },
     "configValidationMode": "warn",
@@ -1082,7 +1082,7 @@
     "artifact": "C:\\Users\\Administrator\\Desktop\\Citi Training\\Serverless App\\CitiRestAPITraining\\.serverless\\Banking-Project.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/Banking-Project/dev/1623875785780-2021-06-16T20:36:25.780Z",
+    "artifactDirectoryName": "serverless/Banking-Project/dev/1623878341081-2021-06-16T21:19:01.081Z",
     "artifact": "Banking-Project.zip"
   }
 }
