@@ -20,7 +20,7 @@ module.exports.update = (event, context, callback) => {
   }
 
   const params = {
-    TableName: process.env.DYNAMODB_TABLE,
+    TableName: "BankAccounts",
     Key: {
       id: event.pathParameters.id,
     },

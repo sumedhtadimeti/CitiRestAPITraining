@@ -28,9 +28,9 @@ module.exports.delete = (event, context, callback) => {
       result.Items.forEach(function (element, index, array) {
         console.log(
             "printing",
-            element.UserId, "(Line 31)"
+            element.UserId,"(Line 31)"
         );
-        setTimeout(function() { updateID(element.userID); }, 1000);
+        userID = parseInt(element.UserId)
       });
       const response = {
         statusCode: 200,
@@ -39,22 +39,13 @@ module.exports.delete = (event, context, callback) => {
     }
   });
 
-  setTimeout(deleteUser,1500)
-
-};
-
-function updateID(tempUserID) {
-  userID = parseInt(tempUserID);
-}
-
-function deleteUser() {
   const params1 = {
     TableName: "BankAccounts",
     Key: {
       UserId: userID,
     },
   };
-  console.log("User ID: " + userID + " (Line 48)")
+  console.log("User ID: " + element.userID + " (Line 48)")
 
     // delete the todo from the database
     dynamoDb.delete(params1, (error) => {
@@ -76,4 +67,5 @@ function deleteUser() {
       };
       callback(null, response);
     });
-}
+
+};
