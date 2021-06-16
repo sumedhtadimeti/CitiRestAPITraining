@@ -1,0 +1,35 @@
+service: Banking-Project
+
+frameworkVersion: "2.46"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-1:924970593487:table/BankAccounts"
+
+functions:
+
+  get:
+    handler: Methods/get.get
+    events:
+      - http:
+          path: user/{username}/{password}
+          method: get
+          cors: true
+
+  post:
+    handler: Methods/create.create
+    events:
+      - http:
+          path: stocks
+          method: post
+          cors: true

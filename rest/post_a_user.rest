@@ -1,0 +1,7 @@
+POST https://inm5eadyn0.execute-api.us-east-1.amazonaws.com/dev/stocks
+Content-Type: application/json
+
+{
+    "stock" : "AAPL",
+    "price" : "1234.6"
+}

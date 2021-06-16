@@ -1,0 +1,2 @@
+GET https://j0tyaj0h3d.execute-api.us-east-1.amazonaws.com/dev/user/1
+Content-Type: application/json
