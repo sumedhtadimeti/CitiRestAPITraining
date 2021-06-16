@@ -1,2 +1,2 @@
-GET https://j0tyaj0h3d.execute-api.us-east-1.amazonaws.com/dev/user/1
+GET https://j0tyaj0h3d.execute-api.us-east-1.amazonaws.com/dev/user/jsmith123/!khsf2s
 Content-Type: application/json

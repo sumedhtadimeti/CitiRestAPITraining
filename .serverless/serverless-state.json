@@ -196,7 +196,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/Banking-Project/dev/1623859779290-2021-06-16T16:09:39.290Z/Banking-Project.zip"
+                "S3Key": "serverless/Banking-Project/dev/1623870465014-2021-06-16T19:07:45.014Z/Banking-Project.zip"
               },
               "Handler": "Methods/get.get",
               "Runtime": "nodejs14.x",
@@ -221,7 +221,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/Banking-Project/dev/1623859779290-2021-06-16T16:09:39.290Z/Banking-Project.zip"
+                "S3Key": "serverless/Banking-Project/dev/1623870465014-2021-06-16T19:07:45.014Z/Banking-Project.zip"
               },
               "Handler": "Methods/create.create",
               "Runtime": "nodejs14.x",
@@ -239,24 +239,24 @@
               "PostLogGroup"
             ]
           },
-          "GetLambdaVersionXz6rlvM6OKPREne5XQasQriZ3Loh7Hl6zKwI0AsDxk": {
+          "GetLambdaVersionHuDcRQN1IhImH8LhASay1xQ31GhdtlemQ7IW6wcymdU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetLambdaFunction"
               },
-              "CodeSha256": "qLvjW/CR7QVxqwcyEcJH1VssyqyyzDmR6k6jVEkhcz0="
+              "CodeSha256": "k9yA65obdlFHCoi9o7sg4gf6peCV1QBPoMz24jkiBZE="
             }
           },
-          "PostLambdaVersionAtdjldKY1fVRN2L9kx8ob0wb7f5lAOfGWhMlZQsM0": {
+          "PostLambdaVersion4oHdZFSLkjKcOxjXIWEQ6HzIvYd78tPEr29UwfFtjY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PostLambdaFunction"
               },
-              "CodeSha256": "qLvjW/CR7QVxqwcyEcJH1VssyqyyzDmR6k6jVEkhcz0="
+              "CodeSha256": "k9yA65obdlFHCoi9o7sg4gf6peCV1QBPoMz24jkiBZE="
             }
           },
           "ApiGatewayRestApi": {
@@ -298,6 +298,18 @@
               }
             }
           },
+          "ApiGatewayResourceUserUsernameVarPasswordVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceUserUsernameVar"
+              },
+              "PathPart": "{password}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
           "ApiGatewayResourceStocks": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
@@ -313,7 +325,7 @@
               }
             }
           },
-          "ApiGatewayMethodUserUsernameVarOptions": {
+          "ApiGatewayMethodUserUsernameVarPasswordVarOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -351,7 +363,7 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceUserUsernameVar"
+                "Ref": "ApiGatewayResourceUserUsernameVarPasswordVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -403,13 +415,13 @@
               }
             }
           },
-          "ApiGatewayMethodUserUsernameVarGet": {
+          "ApiGatewayMethodUserUsernameVarPasswordVarGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "GET",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceUserUsernameVar"
+                "Ref": "ApiGatewayResourceUserUsernameVarPasswordVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -489,7 +501,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1623859774627": {
+          "ApiGatewayDeployment1623870460348": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -498,9 +510,9 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodUserUsernameVarOptions",
+              "ApiGatewayMethodUserUsernameVarPasswordVarOptions",
               "ApiGatewayMethodStocksOptions",
-              "ApiGatewayMethodUserUsernameVarGet",
+              "ApiGatewayMethodUserUsernameVarPasswordVarGet",
               "ApiGatewayMethodStocksPost"
             ]
           },
@@ -591,7 +603,7 @@
           "GetLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetLambdaVersionXz6rlvM6OKPREne5XQasQriZ3Loh7Hl6zKwI0AsDxk"
+              "Ref": "GetLambdaVersionHuDcRQN1IhImH8LhASay1xQ31GhdtlemQ7IW6wcymdU"
             },
             "Export": {
               "Name": "sls-Banking-Project-dev-GetLambdaFunctionQualifiedArn"
@@ -600,7 +612,7 @@
           "PostLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PostLambdaVersionAtdjldKY1fVRN2L9kx8ob0wb7f5lAOfGWhMlZQsM0"
+              "Ref": "PostLambdaVersion4oHdZFSLkjKcOxjXIWEQ6HzIvYd78tPEr29UwfFtjY"
             },
             "Export": {
               "Name": "sls-Banking-Project-dev-PostLambdaFunctionQualifiedArn"
@@ -725,7 +737,7 @@
         "events": [
           {
             "http": {
-              "path": "user/{username}",
+              "path": "user/{username}/{password}",
               "method": "get",
               "cors": {
                 "origins": [
@@ -756,7 +768,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetLambdaVersionXz6rlvM6OKPREne5XQasQriZ3Loh7Hl6zKwI0AsDxk"
+        "versionLogicalId": "GetLambdaVersionHuDcRQN1IhImH8LhASay1xQ31GhdtlemQ7IW6wcymdU"
       },
       "post": {
         "handler": "Methods/create.create",
@@ -794,7 +806,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "PostLambdaVersionAtdjldKY1fVRN2L9kx8ob0wb7f5lAOfGWhMlZQsM0"
+        "versionLogicalId": "PostLambdaVersion4oHdZFSLkjKcOxjXIWEQ6HzIvYd78tPEr29UwfFtjY"
       }
     },
     "configValidationMode": "warn",
@@ -813,10 +825,10 @@
     },
     "layers": {},
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "C:\\Users\\Administrator\\Desktop\\Citi Training\\Serverless App\\.serverless\\Banking-Project.zip"
+    "artifact": "C:\\Users\\Administrator\\Desktop\\Citi Training\\Serverless App\\CitiRestAPITraining\\.serverless\\Banking-Project.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/Banking-Project/dev/1623859779290-2021-06-16T16:09:39.290Z",
+    "artifactDirectoryName": "serverless/Banking-Project/dev/1623870465014-2021-06-16T19:07:45.014Z",
     "artifact": "Banking-Project.zip"
   }
 }
