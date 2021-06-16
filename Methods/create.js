@@ -11,13 +11,26 @@ module.exports.create = (event, context, callback) => {
  
 
   const params = {
-    TableName: "example_table",
+    TableName: "BankAccounts",
     Item: {
-      id: data.stock,
-      price: data.price
+      Username: data.username,
+      Password: data.password,
+      UserId: parseFloat(data.userid),
+      SANum: parseFloat(data.sanum),
+      SavingsBalance: parseFloat(data.savingsbalance),
+      CANum: parseFloat(data.canum),
+      CheckingBalance: parseFloat(data.checkingbalance),
+      FirstName : data.firstname,
+      LastName: data.lastname
     },
   };
 
+  console.log(params.Item.UserId)
+  console.log(params.Item.SANum)
+  console.log(params.Item.SavingsBalance)
+  console.log(params.Item.CANum)
+  console.log(params.Item.CheckingBalance)
+  
   // write the todo to the database
   dynamoDb.put(params, (error) => {
     // handle potential errors

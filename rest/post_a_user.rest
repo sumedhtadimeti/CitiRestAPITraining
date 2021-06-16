@@ -1,7 +1,14 @@
-POST https://inm5eadyn0.execute-api.us-east-1.amazonaws.com/dev/stocks
+POST https://j0tyaj0h3d.execute-api.us-east-1.amazonaws.com/dev/create
 Content-Type: application/json
 
 {
-    "stock" : "AAPL",
-    "price" : "1234.6"
+    "userid" : "8",
+    "sanum" : "9274927647",
+    "password" : "%45345fAF" ,
+    "canum" : "2525234265",
+    "checkingbalance" : "0",
+    "firstname" : "Sarah",
+    "savingsbalance" : "0",
+    "lastname" : "Walton",
+    "username" : "sarahw"
 }

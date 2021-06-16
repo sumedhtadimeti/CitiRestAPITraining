@@ -30,6 +30,14 @@ functions:
     handler: Methods/create.create
     events:
       - http:
-          path: stocks
+          path: create
           method: post
+          cors: true
+
+  delete:
+    handler: Methods/delete.delete
+    events:
+      - http:
+          path: delete/{username}/{password}
+          method: delete
           cors: true
