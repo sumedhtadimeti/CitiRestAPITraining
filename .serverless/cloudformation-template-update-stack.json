@@ -89,6 +89,12 @@
         "LogGroupName": "/aws/lambda/Banking-Project-dev-delete"
       }
     },
+    "UpdateLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/Banking-Project-dev-update"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -185,7 +191,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/Banking-Project/dev/1623940376329-2021-06-17T14:32:56.329Z/Banking-Project.zip"
+          "S3Key": "serverless/Banking-Project/dev/1623943058234-2021-06-17T15:17:38.234Z/Banking-Project.zip"
         },
         "Handler": "Methods/get.get",
         "Runtime": "nodejs14.x",
@@ -210,7 +216,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/Banking-Project/dev/1623940376329-2021-06-17T14:32:56.329Z/Banking-Project.zip"
+          "S3Key": "serverless/Banking-Project/dev/1623943058234-2021-06-17T15:17:38.234Z/Banking-Project.zip"
         },
         "Handler": "Methods/create.create",
         "Runtime": "nodejs14.x",
@@ -235,7 +241,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/Banking-Project/dev/1623940376329-2021-06-17T14:32:56.329Z/Banking-Project.zip"
+          "S3Key": "serverless/Banking-Project/dev/1623943058234-2021-06-17T15:17:38.234Z/Banking-Project.zip"
         },
         "Handler": "Methods/delete.delete",
         "Runtime": "nodejs14.x",
@@ -253,34 +259,69 @@
         "DeleteLogGroup"
       ]
     },
-    "GetLambdaVersiontfZ7uy11MjxkSHOKmrVkWyjyJJN2Oh8pPOweuFNY": {
-      "Type": "AWS::Lambda::Version",
-      "DeletionPolicy": "Retain",
+    "UpdateLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
       "Properties": {
-        "FunctionName": {
-          "Ref": "GetLambdaFunction"
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/Banking-Project/dev/1623943058234-2021-06-17T15:17:38.234Z/Banking-Project.zip"
         },
-        "CodeSha256": "O6czZNCKgGSzmnbFoXmR6M4wy+Wcq4uykXplH99a3tw="
-      }
+        "Handler": "Methods/update.update",
+        "Runtime": "nodejs14.x",
+        "FunctionName": "Banking-Project-dev-update",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "UpdateLogGroup"
+      ]
     },
-    "PostLambdaVersionmaTgLH0PPLZ4RP3lFybBucE8HOyrrZI0vpj7KYCKwI": {
+    "PostLambdaVersionhloXdwlYvysBxSQrMcMro1BMVhRoASqdwRr6zZS1ek": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PostLambdaFunction"
         },
-        "CodeSha256": "O6czZNCKgGSzmnbFoXmR6M4wy+Wcq4uykXplH99a3tw="
+        "CodeSha256": "N0bCzq0KZF4eFTTZ34kRTpnF51qkW/9DKELX83M0iM0="
       }
     },
-    "DeleteLambdaVersionIySYIvLjdiBPfrhn1e0BJVzaqw8Qxnz2zNFaxKPgY": {
+    "GetLambdaVersion4rJmyAEXgrjj7KDKX6tDufbym9wV0MukZWNo2rI5Ns": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetLambdaFunction"
+        },
+        "CodeSha256": "N0bCzq0KZF4eFTTZ34kRTpnF51qkW/9DKELX83M0iM0="
+      }
+    },
+    "DeleteLambdaVersionRZLbthyR44KnjY3C0mu0328BezFG4F4PGLGCaxrtQU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteLambdaFunction"
         },
-        "CodeSha256": "O6czZNCKgGSzmnbFoXmR6M4wy+Wcq4uykXplH99a3tw="
+        "CodeSha256": "N0bCzq0KZF4eFTTZ34kRTpnF51qkW/9DKELX83M0iM0="
+      }
+    },
+    "UpdateLambdaVersion1nVELmbOmDFHfT67UiqujebgqkWJVsVbplXLAYmlU10": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UpdateLambdaFunction"
+        },
+        "CodeSha256": "N0bCzq0KZF4eFTTZ34kRTpnF51qkW/9DKELX83M0iM0="
       }
     },
     "ApiGatewayRestApi": {
@@ -383,6 +424,21 @@
           "Ref": "ApiGatewayResourceDeleteUsernameVar"
         },
         "PathPart": "{password}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceUpdate": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "update",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -523,6 +579,51 @@
         }
       }
     },
+    "ApiGatewayMethodUpdateOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,PUT'"
+              },
+              "ResponseTemplates": {
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceUpdate"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
     "ApiGatewayMethodUserUsernameVarPasswordVarGet": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -652,7 +753,50 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1623940371574": {
+    "ApiGatewayMethodUpdatePut": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "PUT",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceUpdate"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "UpdateLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayDeployment1623943053846": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -664,9 +808,11 @@
         "ApiGatewayMethodUserUsernameVarPasswordVarOptions",
         "ApiGatewayMethodCreateOptions",
         "ApiGatewayMethodDeleteUsernameVarPasswordVarOptions",
+        "ApiGatewayMethodUpdateOptions",
         "ApiGatewayMethodUserUsernameVarPasswordVarGet",
         "ApiGatewayMethodCreatePost",
-        "ApiGatewayMethodDeleteUsernameVarPasswordVarDelete"
+        "ApiGatewayMethodDeleteUsernameVarPasswordVarDelete",
+        "ApiGatewayMethodUpdatePut"
       ]
     },
     "GetLambdaPermissionApiGateway": {
@@ -779,6 +925,43 @@
           ]
         }
       }
+    },
+    "UpdateLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "UpdateLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
     }
   },
   "Outputs": {
@@ -790,31 +973,40 @@
         "Name": "sls-Banking-Project-dev-ServerlessDeploymentBucketName"
       }
     },
-    "GetLambdaFunctionQualifiedArn": {
-      "Description": "Current Lambda function version",
-      "Value": {
-        "Ref": "GetLambdaVersiontfZ7uy11MjxkSHOKmrVkWyjyJJN2Oh8pPOweuFNY"
-      },
-      "Export": {
-        "Name": "sls-Banking-Project-dev-GetLambdaFunctionQualifiedArn"
-      }
-    },
     "PostLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PostLambdaVersionmaTgLH0PPLZ4RP3lFybBucE8HOyrrZI0vpj7KYCKwI"
+        "Ref": "PostLambdaVersionhloXdwlYvysBxSQrMcMro1BMVhRoASqdwRr6zZS1ek"
       },
       "Export": {
         "Name": "sls-Banking-Project-dev-PostLambdaFunctionQualifiedArn"
       }
     },
+    "GetLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetLambdaVersion4rJmyAEXgrjj7KDKX6tDufbym9wV0MukZWNo2rI5Ns"
+      },
+      "Export": {
+        "Name": "sls-Banking-Project-dev-GetLambdaFunctionQualifiedArn"
+      }
+    },
     "DeleteLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteLambdaVersionIySYIvLjdiBPfrhn1e0BJVzaqw8Qxnz2zNFaxKPgY"
+        "Ref": "DeleteLambdaVersionRZLbthyR44KnjY3C0mu0328BezFG4F4PGLGCaxrtQU"
       },
       "Export": {
         "Name": "sls-Banking-Project-dev-DeleteLambdaFunctionQualifiedArn"
+      }
+    },
+    "UpdateLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "UpdateLambdaVersion1nVELmbOmDFHfT67UiqujebgqkWJVsVbplXLAYmlU10"
+      },
+      "Export": {
+        "Name": "sls-Banking-Project-dev-UpdateLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {

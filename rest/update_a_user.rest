@@ -1,0 +1,9 @@
+PUT https://j0tyaj0h3d.execute-api.us-east-1.amazonaws.com/dev/update
+Content-Type: application/json
+
+{
+    "oldpassword" : "SDF3d2@" ,
+    "oldusername" : "willcraw",
+    "newusername" : "willc",
+    "newpassword" : "YOthisWOrkD!!"
+}

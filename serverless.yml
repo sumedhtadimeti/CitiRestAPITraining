@@ -41,3 +41,11 @@ functions:
           path: delete/{username}/{password}
           method: delete
           cors: true
+
+  update:
+    handler: Methods/update.update
+    events:
+      - http:
+          path: update
+          method: put
+          cors: true
