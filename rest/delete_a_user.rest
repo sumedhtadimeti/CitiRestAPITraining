@@ -1,3 +1,3 @@
-DELETE https://j0tyaj0h3d.execute-api.us-east-1.amazonaws.com/dev/delete/sarahw/%45345fAF
+DELETE https://j0tyaj0h3d.execute-api.us-east-1.amazonaws.com/dev/delete/jsmith123/!khsf2s
 Content-Type: application/json
 

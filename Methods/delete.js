@@ -4,7 +4,7 @@ const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-depe
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-let userID = 0;
+let userID = 0 ;
 
 module.exports.delete = (event, context, callback) => {
   const params = {
@@ -30,42 +30,42 @@ module.exports.delete = (event, context, callback) => {
             "printing",
             element.UserId,"(Line 31)"
         );
-        userID = parseInt(element.UserId)
+        // userID = parseInt(element.UserId)
+        const params1 = {
+          TableName: "BankAccounts",
+          Key: {
+            UserId: parseInt(element.UserId),
+          },
+        };
+
+        // console.log("User ID: " + userID + " (Line 41)") // this is 0, needs to be a populated value
+
+        // delete the todo from the database
+        dynamoDb.delete(params1, (error, result) => {
+          // handle potential errors
+          if (error) {
+            console.error(error);
+            callback(null, {
+              statusCode: error.statusCode || 501,
+              headers: { 'Content-Type': 'text/plain' },
+              body: 'Couldn\'t remove the todo item.',
+            });
+            return;
+          }
+      
+          // create a response
+          const response = {
+            statusCode: 200,
+            body: JSON.stringify({"Account has been Closed":""}),
+          };
+          callback(null, response);
+        });
+        
       });
-      const response = {
-        statusCode: 200,
-        body: JSON.stringify(result.Items),
-      };
     }
   });
 
-  const params1 = {
-    TableName: "BankAccounts",
-    Key: {
-      UserId: userID,
-    },
-  };
-  console.log("User ID: " + element.userID + " (Line 48)")
 
-    // delete the todo from the database
-    dynamoDb.delete(params1, (error) => {
-      // handle potential errors
-      if (error) {
-        console.error(error);
-        callback(null, {
-          statusCode: error.statusCode || 501,
-          headers: { 'Content-Type': 'text/plain' },
-          body: 'Couldn\'t remove the todo item.',
-        });
-        return;
-      }
-  
-      // create a response
-      const response = {
-        statusCode: 200,
-        body: JSON.stringify({"Account has been Closed":""}),
-      };
-      callback(null, response);
-    });
+
 
 };
